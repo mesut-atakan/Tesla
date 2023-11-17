@@ -1,5 +1,6 @@
 using UnityEngine;
 using CameraController; // The namespace where we manage camera controls!
+using Character; 
 
 
 namespace Manager
@@ -7,14 +8,26 @@ namespace Manager
     internal class GameManager : MonoBehaviour
     {
 #region ||~~~~~~~~|| SERIALIZE FIELDS ||~~~~~~~~||
-        [SerializeField] private InputManager inputManager;
         
         
         
+
+
+
+
         [Header("Script And Classes")]
+
+
+        [SerializeField] private InputManager inputManager;
+
+        [SerializeField] private PlayerController playerController;
+
+
+
         
-        [Tooltip("Class to run to have a player machine perspective!")]
-        [SerializeField] private RotationCameraController rotationCameraController;
+        [Tooltip("Add the `Top Down Controller` class used for the Top Down Shooter perspective!")]
+        [SerializeField] private TopDownCamera topDownCamera;
+      
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 
@@ -41,6 +54,19 @@ namespace Manager
 
         internal InputManager _inputManager { get => this.inputManager; }
 
+        internal TopDownCamera _topDownCamera
+        {
+            get => this.topDownCamera;
+            set => this.topDownCamera = value;
+        }
+
+
+        internal PlayerController _playerController
+        {
+            get => this.playerController;
+            set => this.playerController = value;
+        }
+
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
@@ -64,8 +90,6 @@ namespace Manager
 
         private void Awake() 
         {
-            this.rotationCameraController._camera = Camera.main;
-
             this._rotationMode = true;
         }
 
@@ -78,7 +102,7 @@ namespace Manager
 
 
         private void Start() {
-            
+            // MouseCursorPrivate();
         }
 
 
@@ -96,7 +120,10 @@ namespace Manager
 
 
         private void Update() {
-            
+            if (Input.GetKeyDown(this.inputManager._interactionKey))
+            {
+                this.playerController.Move();
+            }
         }
 
 
@@ -104,11 +131,28 @@ namespace Manager
 
 
         private void LateUpdate() {
-            /* ~~ Camera Controller ~~ */
-            if (this._rotationMode && Input.GetKey(this.inputManager._secondInteractionKey))      // If the camera mode is in 'rotation' mode and the 'secondInteractionKey' button is pressed
-            {
-                this.rotationCameraController.CameraMove();     // The camera is in rotation mode and the camera will be rotated!
-            }
+            this.playerController.AnimationController();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void MouseCursorPrivate()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }

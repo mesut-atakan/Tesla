@@ -120,6 +120,16 @@ namespace CameraController
 
 
 
+
+
+#region ||~~~~~~~~|| CONSTAINS FIELDS ||~~~~~~~~||
+
+        private const sbyte _rotationSpeedMultiply = 100;
+
+#endregion
+
+
+
 #region ||~~~~~~~~|| PROPTERTIES ||~~~~~~~~||
 
         internal Camera _camera
@@ -154,31 +164,68 @@ namespace CameraController
 
 
 
+        internal Quaternion CameraMove()
+        {
+            /* ~~ Variables ~~ */
+            Quaternion _targetRotation;
+
+            this.mouseX += Input.GetAxis("Mouse X") * this.rotateSpeed;
+            this.mouseY -= Input.GetAxis("Mouse Y") * this.rotateSpeed;
+
+            // Sınırları kontrol et
+            this.mouseY = Mathf.Clamp(this.mouseY, -90f, 90f);
+
+            _targetRotation = Quaternion.Euler(this.mouseY, this.mouseX, 0f);
+
+            Debug.Log($"Target Rotation: {this.mouseY}");
+
+            // Dönüşü sınırla ve pürüzsüzleştir
+            this.pivotTransform.rotation = Quaternion.Slerp(this.pivotTransform.rotation, _targetRotation, this.smoothnes);
+
+            this.camera.transform.LookAt(this.pivotTransform.position);
+
+            return this.pivotTransform.rotation;
+        }
 
 
 
 
-
-
+/*
         /// <summary>
         /// You can rotate your camera with this method!
         /// </summary>
         /// <returns>Instant rotation of the camera will be reversed!</returns>
         internal Quaternion CameraMove()
         {
-            /* ~~ Variables ~~ */
+            // ~~ Variables ~~
             Quaternion _targetRotation;
 
 
             this.mouseX += Input.GetAxis("Mouse X") * this.rotateSpeed;
             this.mouseY -= Input.GetAxis("Mouse Y") * this.rotateSpeed;
+
+
+            Debug.Log($"MouseY: {mouseY}");
+
             
             _targetRotation = Quaternion.Euler(mouseY, mouseX, 0f);
-            this.pivotTransform.rotation = Quaternion.Slerp(this.pivotTransform.rotation, _targetRotation, this.smoothnes);
+
+            Debug.Log($"Target Rotation: {_targetRotation}");
+            this.pivotTransform.rotation = Quaternion.Slerp(this.pivotTransform.rotation, _targetRotation, smoothnes);
             this.camera.transform.LookAt(this.pivotTransform.position);     // With this method, the camera will now constantly look at the pivot point!
 
             return this.pivotTransform.rotation;
         }
+
+
+*/
+
+
+
+
+
+
+
 
         internal Collider InteractionObject()
         {
