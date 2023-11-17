@@ -147,6 +147,28 @@ namespace CameraController
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+        private void Update() {
+            if (Input.GetMouseButton(1))
+                CameraMove();
+        }
+
+
+
+
+
+
+
         private void OnValidate() {
             /* ~~ Variables ~~ */
             Vector3 _camPos;

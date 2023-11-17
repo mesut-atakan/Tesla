@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: f2f9734b40ad7cc42a23993f80f02c1f
+  productGUID: 9f2dc89e54397ba4cac187f4563fd7b9
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -910,10 +910,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 0ec1e09a-6f70-4514-a023-76e931bb37d2
+  cloudProjectId: 50b76523-7148-48eb-9bdd-01b8291214a8
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Tesla
+  projectName: Tesla 2023-11-17_13-34-04
   organizationId: nots-game-studio
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
