@@ -23,7 +23,7 @@ namespace CameraController
         [Space(10f), Header("Fields")]
 
         [Tooltip("Assign the Topdown Shotter camera with which the game is played here!")]
-        [SerializeField] private GameObject mainCamera;
+        [SerializeField] private Camera mainCamera;
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 
@@ -31,11 +31,11 @@ namespace CameraController
 
 #region ||~~~~~~~~|| PROPERTIES ||~~~~~~~~||
 
-        internal GameObject _activeCamera { get; set; } = null;
+        internal Camera _activeCamera { get; set; } = null;
 
         internal bool _gameCamera { get; set; } = true;
 
-        internal GameObject _mainCamera
+        internal Camera _mainCamera
         {
             get => this.mainCamera;
             set => this.mainCamera = value;
@@ -77,15 +77,17 @@ namespace CameraController
             switch (cameraAxis)
             {
                 case CameraAxis.TeslaCoil:
-                    this._activeCamera.SetActive(false);
-                    this.gameManager._interactionTeslaCoil._camera.SetActive(true);
+                    this._activeCamera.gameObject.SetActive(false);
+                    this.gameManager._interactionTeslaCoil._camera.gameObject.SetActive(true);
                     this._activeCamera = this.gameManager._interactionTeslaCoil._camera;
+                    this.gameManager._itemInteraction._camera = this._activeCamera;
                     break;
 
                     case CameraAxis.Table:
-                        this._activeCamera.SetActive(false);
-                        this.gameManager._interactionTable._camera.SetActive(true);
+                        this._activeCamera.gameObject.SetActive(false);
+                        this.gameManager._interactionTable._camera.gameObject.SetActive(true);
                         this._activeCamera = this.gameManager._interactionTable._camera;
+                        this.gameManager._itemInteraction._camera = this._activeCamera;
                         break;
 
                         case CameraAxis.Telegraph:
@@ -93,9 +95,10 @@ namespace CameraController
                             break;
 
                             case CameraAxis.MainCamera:
-                                this._activeCamera.SetActive(false);
-                                this.mainCamera.SetActive(true);
+                                this._activeCamera.gameObject.SetActive(false);
+                                this.mainCamera.gameObject.SetActive(true);
                                 this._activeCamera = this.mainCamera;
+                                this.gameManager._itemInteraction._camera = null;
                                 break;
             }
         }

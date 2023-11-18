@@ -35,11 +35,18 @@ internal class Events : MonoBehaviour
     public void ChangeToCamera()
     {
         if (this.changeCameraAxis == CameraManager.CameraAxis.MainCamera)
+        {
             this.gameManager._cameraManager._gameCamera = true;
+            this.gameManager.ItemInteractionMod(false);
+        }
         else
+        {
             this.gameManager._cameraManager._gameCamera = false;
+        }
+
 
         this.gameManager._cameraManager.ManagerCamera(this.changeCameraAxis);
+        this.gameManager.ItemInteractionMod(true);
         this.changeCameraAxis = CameraManager.CameraAxis.Null; 
         Debug.Log($"CameraChange Info {this.changeCameraAxis}");
     }

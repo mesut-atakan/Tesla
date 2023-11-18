@@ -17,7 +17,7 @@ namespace Interaction
 
 
         [Tooltip("If clicking on this object will switch to the FPS Viewpoint, add a camera component here!")]
-        [SerializeField] protected new GameObject camera;
+        [SerializeField] protected new Camera camera;
 
 
         [SerializeField] protected CameraManager.CameraAxis cameraAxis;
@@ -51,7 +51,7 @@ namespace Interaction
         
         internal CameraManager.CameraAxis _cameraAxis { get => this.cameraAxis; }
 
-        internal GameObject _camera 
+        internal Camera _camera 
         {
             get => this.camera;
             set => this.camera = value;

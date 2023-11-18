@@ -1,12 +1,13 @@
 using Interaction;
 using Manager;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
 
 
-namespace Character
+namespace Player
 {
     internal class PlayerController : MonoBehaviour
     {
@@ -54,8 +55,10 @@ namespace Character
 
 
 
+
         // Animation Controller
-        private bool _isMove;
+        private bool _anim = false;
+
 
 
 
@@ -85,6 +88,8 @@ namespace Character
 
 
 #region ||~~~~~~~~|| CONSTAINS FIELDS ||~~~~~~~~||
+        internal bool _isMove { get; set; } = true;
+
 
         internal const string moveLayerName = "Move";
         internal const string interactionLayerName = "Interaction";
@@ -115,7 +120,7 @@ namespace Character
         /// </summary>
         internal void Move()
         {
-            if (CreateRay(moveLayerName))
+            if (CreateRay(moveLayerName) && this._isMove)
             {
                 
                     Debug.Log("MOVE");
@@ -130,7 +135,7 @@ namespace Character
         /// </summary>
         internal void Interaction()
         {
-            if (CreateRay(interactionLayerName))
+            if (CreateRay(interactionLayerName) && this._isMove)
             {
                 this._interactionClass = _hit.collider.GetComponent<InteractionClass>();
 
@@ -189,18 +194,18 @@ namespace Character
         {
             if (this.ai.hasPath)
             {
-                if (!this._isMove)
+                if (!this._anim)
                 {
                     this.animator.SetTrigger("Move");
-                    this._isMove = true;
+                    _anim = true;
                 }
             }
             else
             {
-                if (this._isMove)
+                if (this._anim)
                 {
                     this.animator.SetTrigger("Idle");
-                    this._isMove = false;
+                    _anim = false;
                 }
             }
         }

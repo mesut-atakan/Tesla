@@ -1,8 +1,9 @@
 using UnityEngine;
 using CameraController; // The namespace where we manage camera controls!
-using Character;
+using Player;
 using Interaction;
 using UnityEditor.PackageManager;
+using UnityEditor;
 
 
 namespace Manager
@@ -27,6 +28,8 @@ namespace Manager
         [SerializeField] private CameraManager cameraManager;
 
         [SerializeField] private Events events;
+
+        [SerializeField] private ItemInteraction itemInteraction;
 
 
         [Tooltip("Add the `Top Down Controller` class used for the Top Down Shooter perspective!")]
@@ -64,6 +67,8 @@ namespace Manager
 #region ||~~~~~~~~|| PROPERTIES ||~~~~~~~~||
 
         internal InputManager _inputManager { get => this.inputManager; }
+
+        internal bool _interactionItemMode { get; set; }
 
         internal TopDownCamera _topDownCamera
         {
@@ -108,6 +113,13 @@ namespace Manager
         }
 
 
+        internal ItemInteraction _itemInteraction
+        {
+            get => this.itemInteraction;
+            set => this.itemInteraction = value;
+        }
+
+
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 
@@ -131,6 +143,7 @@ namespace Manager
         private void Awake() 
         {
             this.cameraManager._activeCamera = this.cameraManager._mainCamera;
+            this.playerController._isMove = true;
         }
 
 
@@ -167,6 +180,12 @@ namespace Manager
             if (Input.GetKeyDown(this.inputManager._interactionKey))
             {
                 this.playerController.Move();
+                
+
+                if (this._interactionItemMode)
+                {
+                    this.itemInteraction.Interaction();
+                }
             }
             else if (Input.GetKeyDown(this.inputManager._secondInteractionKey))
             {
@@ -189,6 +208,22 @@ namespace Manager
 
 
 
+
+
+
+
+
+
+
+        /// <summary>
+        /// With this method, you can put the character into or out of Item Interaction mode!
+        /// </summary>
+        /// <param name="mode">If this parameter is true, the character switches to interaction mode; if false, the character exits interaction mode!</param>
+        internal void ItemInteractionMod(bool mode)
+        {
+            this.playerController._isMove = !mode;
+            this._interactionItemMode = mode;
+        }
 
 
 
