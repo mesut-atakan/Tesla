@@ -1,3 +1,4 @@
+using Interaction;
 using Manager;
 using UnityEditor;
 using UnityEngine;
@@ -23,14 +24,7 @@ namespace Character
 
 
 
-        [Header("Interaction Fields")]
 
-        [Tooltip("Enter the layers that the player can interact with!")]
-        [SerializeField] private LayerMask interactionLayer;
-
-
-        [Tooltip("Enter on which layer the character can move!")]
-        [SerializeField] private LayerMask moveLayer;
         
 
 
@@ -61,7 +55,24 @@ namespace Character
 
 
         // Animation Controller
-        private bool isMove;
+        private bool _isMove;
+
+
+
+
+        // Classes
+        private InteractionClass _interactionClass;
+
+
+#endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
+
+
+
+
+
+#region ||~~~~~~~~|| PROPERTIES ||~~~~~~~~||
+
+        internal bool _interactionMove { get; set; } = false;
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
@@ -70,18 +81,92 @@ namespace Character
 
 
 
+
+
+
+#region ||~~~~~~~~|| CONSTAINS FIELDS ||~~~~~~~~||
+
+        internal const string moveLayerName = "Move";
+        internal const string interactionLayerName = "Interaction";
+
+#endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// With this method you can move the player!
+        /// </summary>
         internal void Move()
         {
-            // Get Mouse Position
-            this._mousePosition = Input.mousePosition;
-            
-            // Start Ray Position
-            _ray = this.gameManager._topDownCamera._camera.ScreenPointToRay(this._mousePosition);
-
-            // Is there any interaction?
-            if (Physics.Raycast(this._ray, out this._hit, Mathf.Infinity, this.moveLayer))
+            if (CreateRay(moveLayerName))
             {
-                this.ai.destination = this._hit.point;
+                
+                    Debug.Log("MOVE");
+                    this.ai.destination = this._hit.point;
+                
+            }
+        }
+
+
+        /// <summary>
+        /// You can interact with objects with this method!
+        /// </summary>
+        internal void Interaction()
+        {
+            if (CreateRay(interactionLayerName))
+            {
+                this._interactionClass = _hit.collider.GetComponent<InteractionClass>();
+
+                this.ai.destination = this._interactionClass._objectInteractionTransform.position;
+
+                this._interactionMove = true;
+
+                this.gameManager._events.changeCameraAxis = this._interactionClass._cameraAxis;
+            }
+        }
+        
+
+
+
+
+
+        /// <summary>
+        /// You can create a new raycast with this function!
+        /// </summary>
+        /// <param name="layerMask">Enter which layers you want the raycast to ignore!</param>
+        /// <returns>Eger ray bir obje ile temas ediyorsa true etmiyorsa false degerlerini geri donderecek!</returns>
+        private bool CreateRay(string layerName)
+        {
+            this._mousePosition = Input.mousePosition;
+            this._ray = this.gameManager._topDownCamera._camera.ScreenPointToRay(_mousePosition);
+
+            if (Physics.Raycast(_ray, out this._hit, Mathf.Infinity) && this._hit.collider.gameObject.layer == LayerMask.NameToLayer(layerName))
+            {
+                Debug.DrawRay(_ray.origin, _hit.point, Color.yellow, 2.0f);
+                Debug.Log($"Hit Info: {this._hit.collider.name}");
+                return true;
+            }
+            else
+            {
+                Debug.DrawRay(_ray.origin, this.gameManager._topDownCamera._camera.transform.forward, Color.red, 1.0f);
+                return false;
             }
         }
 
@@ -89,25 +174,55 @@ namespace Character
 
 
 
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// With this method you can control the animations of the character!
+        /// </summary>
         internal void AnimationController()
         {
             if (this.ai.hasPath)
             {
-                if (!this.isMove)
+                if (!this._isMove)
                 {
-                    Debug.Log("is walk");
                     this.animator.SetTrigger("Move");
-                    this.isMove = true;
+                    this._isMove = true;
                 }
             }
             else
             {
-                if (this.isMove)
+                if (this._isMove)
                 {
-                    Debug.Log("no walk");
                     this.animator.SetTrigger("Idle");
-                    this.isMove = false;
+                    this._isMove = false;
                 }
+            }
+        }
+
+
+
+
+
+        internal bool InteractionAreaControl()
+        {
+            if (Vector3.Distance(this.ai.gameObject.transform.position, this._interactionClass._objectInteractionTransform.position) < 1.0f)
+            {
+                this._interactionMove = false;
+                this.gameManager._cameraManager.ChangeCameraAnimation();
+                this.gameManager._events.ChangeToCamera();
+                this.gameManager._events.changeCameraAxis = CameraController.CameraManager.CameraAxis.Null;
+                this._interactionClass = null;
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

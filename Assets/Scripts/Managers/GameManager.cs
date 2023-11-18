@@ -1,6 +1,8 @@
 using UnityEngine;
 using CameraController; // The namespace where we manage camera controls!
-using Character; 
+using Character;
+using Interaction;
+using UnityEditor.PackageManager;
 
 
 namespace Manager
@@ -22,11 +24,24 @@ namespace Manager
 
         [SerializeField] private PlayerController playerController;
 
+        [SerializeField] private CameraManager cameraManager;
+
+        [SerializeField] private Events events;
 
 
-        
         [Tooltip("Add the `Top Down Controller` class used for the Top Down Shooter perspective!")]
         [SerializeField] private TopDownCamera topDownCamera;
+
+
+
+
+
+
+        [Space(10f), Header("Interaction Classes")]
+
+        [SerializeField] private InteractionTeslaCoil interactionTeslaCoil;
+
+        [SerializeField] private InteractionTable interactionTable;
       
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
@@ -38,10 +53,6 @@ namespace Manager
 
 
 #region ||~~~~~~~~|| PRIVATE FIELDS ||~~~~~~~~||
-
-        // ~~ Camera Mode:
-        private bool _topDownMode = false;
-        private bool _rotationMode = false;
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
@@ -68,6 +79,35 @@ namespace Manager
         }
 
 
+        internal CameraManager _cameraManager
+        {
+            get => this.cameraManager;
+            set => this.cameraManager = value;
+        }
+
+
+
+        internal InteractionTeslaCoil _interactionTeslaCoil
+        {
+            get => this.interactionTeslaCoil;
+            set => this.interactionTeslaCoil = value;
+        }
+
+
+        internal InteractionTable _interactionTable
+        {
+            get => this.interactionTable;
+            set => this.interactionTable = value;
+        }
+
+
+        internal Events _events
+        {
+            get => this.events;
+            set => this.events = value;
+        }
+
+
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 
@@ -90,7 +130,7 @@ namespace Manager
 
         private void Awake() 
         {
-            this._rotationMode = true;
+            this.cameraManager._activeCamera = this.cameraManager._mainCamera;
         }
 
 
@@ -111,7 +151,11 @@ namespace Manager
 
 
         private void FixedUpdate() {
-            
+            // if character go to interaction area 
+            if (this.playerController._interactionMove)
+            {
+                this.playerController.InteractionAreaControl();
+            }
         }
 
 
@@ -123,6 +167,10 @@ namespace Manager
             if (Input.GetKeyDown(this.inputManager._interactionKey))
             {
                 this.playerController.Move();
+            }
+            else if (Input.GetKeyDown(this.inputManager._secondInteractionKey))
+            {
+                this.playerController.Interaction();
             }
         }
 

@@ -34,29 +34,10 @@ namespace CameraController
         [Tooltip("Enter how far the camera should be from the pivot point with this variable!")]
         [SerializeField, Range(0, 5)] private float distance = 2;
 
-        [Tooltip("What is the maximum distance the camera can be from the pivot point?")]
-        [SerializeField] private float maxDistance = 5;
-
-
-        [Tooltip("What is the minimum distance from the camera pivot point?")]
-        [SerializeField] private float minDistance = 0.66f;
 
 
 
 
-
-
-
-
-
-
-
-
-        [Header("Rotation Clamp")]
-
-        [SerializeField, Range(-360, 360)] private float rotationMinYAxis = -100.0f;
-        
-        [SerializeField, Range(-360, 360)] private float rotationMaxYAxis = 270.0f;
 
 
 
