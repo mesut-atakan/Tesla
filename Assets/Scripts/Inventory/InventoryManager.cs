@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Inventory
 {
-    internal class Inventory : MonoBehaviour
+    internal class InventoryManager : MonoBehaviour
     {
 #region ||~~~~~~~~|| SERIALZIE FIELDS ||~~~~~~~~||
 
@@ -23,18 +23,20 @@ namespace Inventory
     
 
         /// <summary>
-        /// Bu metod ile envanterinizde bos olan bir kutuya item atayabilirsiniz!
+        /// With this method, you can assign an item to an empty box in your inventory!
         /// </summary>
-        internal void InventoryAddItem()
+        internal void InventoryAddItem(Item item)
         {
             // ~~ Variables ~~
-            InventoryItem _inventoryItem;
+            InventoryItem _inventoryBox;
             
-            _inventoryItem = InventoryIsFull();
-            if (_inventoryItem == null) return;     // Inventory Is Full!
-
-            _inventoryItem._boxFull = true;
-            _inventoryItem._inventoryItemImage.sprite = _inventoryItem._item._itemSprite;
+            _inventoryBox = InventoryIsFull();
+            if(_inventoryBox == null) return;
+            Debug.Log("Add Item", _inventoryBox.gameObject);
+            _inventoryBox._inventoryItemImage.sprite = item._itemSprite;
+            _inventoryBox._boxFull = true;
+            _inventoryBox._item = item;
+            _inventoryBox._inventoryItemImage.enabled = true;
         }
 
 

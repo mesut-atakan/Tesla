@@ -80,6 +80,7 @@ namespace Player
                     if (_inventoryItem != null)
                     {
                         _inventoryItem.gameObject.SetActive(false);
+                        this.gameManager._inventoryManager.InventoryAddItem(_inventoryItem);
                     }
 
                 }

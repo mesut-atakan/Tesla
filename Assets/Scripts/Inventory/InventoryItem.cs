@@ -27,7 +27,7 @@ namespace Inventory
 
         internal bool _boxFull 
         {
-            get => this._boxFull;
+            get => this.boxFull;
             set => this.boxFull = value;
         }
 

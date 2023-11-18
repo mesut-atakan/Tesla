@@ -4,6 +4,7 @@ using Player;
 using Interaction;
 using UnityEditor.PackageManager;
 using UnityEditor;
+using Inventory;
 
 
 namespace Manager
@@ -30,6 +31,7 @@ namespace Manager
         [SerializeField] private Events events;
 
         [SerializeField] private ItemInteraction itemInteraction;
+        [SerializeField] private InventoryManager inventoryManager;
 
 
         [Tooltip("Add the `Top Down Controller` class used for the Top Down Shooter perspective!")]
@@ -117,6 +119,12 @@ namespace Manager
         {
             get => this.itemInteraction;
             set => this.itemInteraction = value;
+        }
+
+        internal InventoryManager _inventoryManager
+        {
+            get => this.inventoryManager;
+            set => this.inventoryManager = value;
         }
 
 
