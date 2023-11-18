@@ -15,6 +15,7 @@ namespace CameraController
         [SerializeField] private GameManager gameManager;
 
         [SerializeField] private Animator changeCameraAnimator;
+        [SerializeField] private Animator changeCameraAnimator2;
 
 
 
@@ -31,6 +32,8 @@ namespace CameraController
 #region ||~~~~~~~~|| PROPERTIES ||~~~~~~~~||
 
         internal GameObject _activeCamera { get; set; } = null;
+
+        internal bool _gameCamera { get; set; } = true;
 
         internal GameObject _mainCamera
         {
@@ -109,6 +112,16 @@ namespace CameraController
         internal void ChangeCameraAnimation()
         {
             this.changeCameraAnimator.SetTrigger("Change");
+            this.changeCameraAnimator2.SetTrigger("Change");
+        }
+
+        /// <summary>
+        /// With this method, you can switch to the main camera of the game!
+        /// </summary>
+        internal void GoToGameCameraAxisAnimation()
+        {
+            this.changeCameraAnimator.SetTrigger("ExitChange");
+            this.changeCameraAnimator2.SetTrigger("ExitChange");
         }
     }
 }

@@ -172,6 +172,10 @@ namespace Manager
             {
                 this.playerController.Interaction();
             }
+            else if (Input.GetKeyDown(this.inputManager._backKey) || Input.GetKeyDown(this.inputManager._backKey2))
+            {
+                this.playerController.GoToGameCamera();
+            }
         }
 
 

@@ -13,6 +13,9 @@ namespace Manager
 
         [SerializeField] private KeyCode secondInteractionKey = KeyCode.Mouse1;
 
+        [SerializeField] private KeyCode backKey = KeyCode.Escape;
+        [SerializeField] private KeyCode backKey2 = KeyCode.Backspace;
+
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 
@@ -25,6 +28,9 @@ namespace Manager
         internal KeyCode _interactionKey { get => this.interactionKey; }
         
         internal KeyCode _secondInteractionKey { get => this.secondInteractionKey; }
+
+        internal KeyCode _backKey { get => this.backKey; }
+        internal KeyCode _backKey2 { get => this.backKey2; }
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
     }

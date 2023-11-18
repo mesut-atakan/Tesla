@@ -215,14 +215,27 @@ namespace Character
             {
                 this._interactionMove = false;
                 this.gameManager._cameraManager.ChangeCameraAnimation();
-                this.gameManager._events.ChangeToCamera();
-                this.gameManager._events.changeCameraAxis = CameraController.CameraManager.CameraAxis.Null;
                 this._interactionClass = null;
                 return true;
             }
             else
             {
                 return false;
+            }
+        }
+
+
+
+
+
+
+
+        internal void GoToGameCamera()
+        {
+            if (this.gameManager._cameraManager._gameCamera == false)
+            {
+                this.gameManager._events.changeCameraAxis = CameraController.CameraManager.CameraAxis.MainCamera;
+                this.gameManager._cameraManager.GoToGameCameraAxisAnimation();
             }
         }
     }
