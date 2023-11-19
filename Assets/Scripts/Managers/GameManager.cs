@@ -2,8 +2,6 @@ using UnityEngine;
 using CameraController; // The namespace where we manage camera controls!
 using Player;
 using Interaction;
-using UnityEditor.PackageManager;
-using UnityEditor;
 using Inventory;
 
 
@@ -32,6 +30,8 @@ namespace Manager
 
         [SerializeField] private ItemInteraction itemInteraction;
         [SerializeField] private InventoryManager inventoryManager;
+
+        [SerializeField] private UIManager uiManager;
 
 
         [Tooltip("Add the `Top Down Controller` class used for the Top Down Shooter perspective!")]
@@ -184,15 +184,20 @@ namespace Manager
 
 
 
-        private void Update() {
+        private void Update() 
+        {
             if (Input.GetKeyDown(this.inputManager._interactionKey))
             {
-                this.playerController.Move();
-                
-
-                if (this._interactionItemMode)
+                if (!this.uiManager.mouseUI)
                 {
-                    this.itemInteraction.Interaction();
+                    this.playerController.Move();
+                    
+
+                    if (this._interactionItemMode)
+                    {
+                        this.itemInteraction.Interaction();
+                    }
+                    
                 }
             }
             else if (Input.GetKeyDown(this.inputManager._secondInteractionKey))
@@ -211,7 +216,12 @@ namespace Manager
 
         private void LateUpdate() {
             this.playerController.AnimationController();
+
+            
         }
+
+
+
 
 
 

@@ -1,4 +1,6 @@
+using Manager;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -8,10 +10,34 @@ namespace Inventory
     {
 #region ||~~~~~~~~|| SERIALZIE FIELDS ||~~~~~~~~||
 
+        [Header("Scripts Or Components")]
+
+        [SerializeField] private GameManager gameManager;
+
         [Header("Inventory Properties")]
 
         [SerializeField] private InventoryItem[] inventoryItems;
 
+
+
+
+        [Header("UI Object")]
+        [SerializeField] private GameObject mouseItemObject;
+        [SerializeField] private Image mouseItemImage;
+
+        [SerializeField] private float itemDistanceMouse = 10f;
+
+
+#endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
+
+
+
+
+
+#region ||~~~~~~~~|| PROPERTIE ||~~~~~~~~||
+
+        // internal bool itemMove { get; set; } = false;
+        private float distanceFromMouse = 1f;
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 

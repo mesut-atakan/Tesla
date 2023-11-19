@@ -19,7 +19,24 @@ namespace Inventory
         [Space(30f)]
         [SerializeField] private Item item;
 
+
+        
+
+        [Header("Components")]
+
+        [SerializeField] private Button button;
+
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -43,7 +60,9 @@ namespace Inventory
             set => this.itemImage = value;
         }
 
+
+        internal Button _button { set => this.button = value; }
+
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
-    
     }
 }

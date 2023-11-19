@@ -38,15 +38,17 @@ internal class Events : MonoBehaviour
         {
             this.gameManager._cameraManager._gameCamera = true;
             this.gameManager.ItemInteractionMod(false);
+            Debug.Log($"Item interaction Mode <color=red><b>{this.gameManager._interactionItemMode}</b></color>");
+
         }
         else
         {
             this.gameManager._cameraManager._gameCamera = false;
+            this.gameManager.ItemInteractionMod(true);
         }
 
 
         this.gameManager._cameraManager.ManagerCamera(this.changeCameraAxis);
-        this.gameManager.ItemInteractionMod(true);
         this.changeCameraAxis = CameraManager.CameraAxis.Null; 
         Debug.Log($"CameraChange Info {this.changeCameraAxis}");
     }

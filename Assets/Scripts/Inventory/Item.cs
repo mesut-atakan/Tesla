@@ -20,6 +20,7 @@ namespace Inventory
         [SerializeField] private string itemName;
         [SerializeField] private string itemDescription;
         [SerializeField] private bool canAddToInventory = true;
+        [SerializeField] private bool canMove = false;
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
@@ -34,6 +35,7 @@ namespace Inventory
         internal string _itemName { get => this.itemName; }
         internal string _itemDescription { get => this.itemDescription; }
         internal bool _canAddToInventory { get => this.canAddToInventory; }
+        internal bool _canMove { get => this.canMove; }
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
     }
