@@ -32,6 +32,9 @@ namespace Inventory
         [SerializeField] private Image paperImage;
 
 
+        [SerializeField] private GameObject trueCable;
+
+
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
@@ -86,7 +89,7 @@ namespace Inventory
                 if (inventoryItem._item == item)
                 {
                     inventoryItem._boxFull = false;
-                    inventoryItem._inventoryItemImage.sprite = null;
+                    inventoryItem._inventoryItemImage.enabled = false;
                     inventoryItem._item = null;
                 }
             }
@@ -121,31 +124,35 @@ namespace Inventory
 
         public void ItemToUse(InventoryItem inventoryItem)
         {
-            switch (inventoryItem._item._itemType)
+            if (inventoryItem._item != null)
             {
-                case Item.ItemType.paper:
-                    this.paperObject.SetActive(true);
-                    this.paperImage.sprite = inventoryItem._item._itemSprite;
-                    break;
+                switch (inventoryItem._item._itemType)
+                {
+                    case Item.ItemType.paper:
+                        this.paperObject.SetActive(true);
+                        this.paperImage.sprite = inventoryItem._item._itemSprite;
+                        break;
 
-                case Item.ItemType.cable:
-                    if (Vector3.Distance(this.gameManager._playerController._playerObject.transform.position, inventoryItem._item._itemAbleToGameObject.transform.position) < this.ableObjectDistance)
-                    {
-                        if (inventoryItem._item._cableIsTrue)
+                    case Item.ItemType.cable:
+                        if (Vector3.Distance(this.gameManager._playerController._playerObject.transform.position, inventoryItem._item._itemAbleToGameObject.transform.position) < this.ableObjectDistance)
                         {
-                            Debug.Log("Bu kablo dogru kablo!");
+                            if (inventoryItem._item._cableIsTrue)
+                            {
+                                this.trueCable.SetActive(true);
+                                InventoryRemoveItem(inventoryItem._item);
+                            }
+                            else
+                            {
+                                Debug.Log("Yanlis Kablo!");
+                                InventoryRemoveItem(inventoryItem._item);
+                            }
                         }
                         else
                         {
-                            Debug.Log("Yanlis Kablo!");
-                            InventoryRemoveItem(inventoryItem._item);
+                            Debug.Log("Obje kullanilamaz!!");
                         }
-                    }
-                    else
-                    {
-                        Debug.Log("Obje kullanilamaz!!");
-                    }
-                    break;
+                        break;
+                }
             }
         }
 

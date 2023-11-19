@@ -66,6 +66,10 @@ namespace Player
              set => this.playerObject = value;
         }
 
+
+
+        internal bool isMorse { get; set; } = false;
+
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 

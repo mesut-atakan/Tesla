@@ -227,7 +227,6 @@ namespace Manager
         private void LateUpdate() {
             this.playerController.AnimationController();
             this.topDownCamera.CameraMovement();
-            
         }
 
 
