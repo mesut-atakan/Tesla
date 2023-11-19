@@ -20,6 +20,12 @@ namespace Inventory
 
 
 
+        [Header("OtherProperties")]
+
+        [SerializeField] private float ableObjectDistance = 2f;
+
+
+
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 
@@ -93,5 +99,23 @@ namespace Inventory
 
             return null;
         }
+
+
+
+
+
+
+
+        #region Events!
+
+        public void ItemToUse(InventoryItem inventoryItem)
+        {
+            if (Vector3.Distance(this.gameManager._playerController._playerObject.transform.position, inventoryItem._item._itemAbleToGameObject.transform.position) < this.ableObjectDistance)
+            {
+                Debug.Log("Obje Kullanilabilir!");
+            }
+        }
+
+        #endregion
     }
 }
