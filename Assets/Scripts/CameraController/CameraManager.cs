@@ -56,6 +56,8 @@ namespace CameraController
             Table,
             Telegraph,
             Cabels,
+            Neon,
+            TimeMachine,
             MainCamera
         }
 
@@ -92,7 +94,10 @@ namespace CameraController
                         break;
 
                         case CameraAxis.Telegraph:
-
+                        this._activeCamera.gameObject.SetActive(false);
+                        this.gameManager.interactionTelegraf._camera.gameObject.SetActive(true);
+                        this._activeCamera = this.gameManager.interactionTelegraf._camera;
+                        this.gameManager._itemInteraction._camera = this._activeCamera;
                             break;
 
                             case CameraAxis.Cabels:
@@ -100,14 +105,29 @@ namespace CameraController
                                 this.gameManager._interactionCable._camera.gameObject.SetActive(true);
                                 this._activeCamera = this.gameManager._interactionCable._camera;
                                 this.gameManager._itemInteraction._camera = this._activeCamera;
+                                
                                 break;
 
-                                case CameraAxis.MainCamera:
+                                case CameraAxis.Neon:
                                     this._activeCamera.gameObject.SetActive(false);
-                                    this.mainCamera.gameObject.SetActive(true);
-                                    this._activeCamera = this.mainCamera;
-                                    this.gameManager._itemInteraction._camera = null;
+                                    this.gameManager.interactionNeon._camera.gameObject.SetActive(true);
+                                    this._activeCamera = this.gameManager.interactionNeon._camera;
+                                    this.gameManager._itemInteraction._camera = this._activeCamera;
                                     break;
+
+                                    case CameraAxis.TimeMachine:
+                                        this._activeCamera.gameObject.SetActive(false);
+                                        this.gameManager.interactionTimeMachine._camera.gameObject.SetActive(true);
+                                        this._activeCamera = this.gameManager.interactionTimeMachine._camera;
+                                        this.gameManager._itemInteraction._camera = this._activeCamera;
+                                        break;
+
+                                        case CameraAxis.MainCamera:
+                                            this._activeCamera.gameObject.SetActive(false);
+                                            this.mainCamera.gameObject.SetActive(true);
+                                            this._activeCamera = this.mainCamera;
+                                            this.gameManager._itemInteraction._camera = null;
+                                            break;
             }
         }
 

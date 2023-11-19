@@ -3,6 +3,7 @@ using CameraController; // The namespace where we manage camera controls!
 using Player;
 using Interaction;
 using Inventory;
+using UnityEngine.AI;
 
 
 namespace Manager
@@ -31,7 +32,7 @@ namespace Manager
         [SerializeField] private ItemInteraction itemInteraction;
         [SerializeField] private InventoryManager inventoryManager;
 
-        [SerializeField] private UIManager uiManager;
+        [SerializeField] public UIManager uiManager;
 
 
         [Tooltip("Add the `Top Down Controller` class used for the Top Down Shooter perspective!")]
@@ -50,6 +51,35 @@ namespace Manager
         [SerializeField] private InteractionTable interactionTable;
 
         [SerializeField] private InteractionCable interactionCable;
+        public InteractionTelegraf interactionTelegraf;
+        public InteractionNeon interactionNeon;
+        public InteractionTimeMachine interactionTimeMachine;
+        
+
+
+
+        [Header("Gizemli Makine 9")]
+
+        public GameObject number9FalseLight;
+        public GameObject number9TrueLight;
+
+
+        public MeshRenderer number9FalseMaterial;
+        public Material number9TrueMaterial;
+
+
+
+        public Animator timeMachineAnimator;
+
+
+
+
+        [Space(30f)]
+
+        public GameObject Key;
+
+
+        public GameObject neonUI;
       
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
@@ -137,6 +167,9 @@ namespace Manager
         }
 
 
+
+
+
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 
@@ -161,6 +194,7 @@ namespace Manager
         {
             this.cameraManager._activeCamera = this.cameraManager._mainCamera;
             this.playerController._isMove = true;
+            this.timeMachineAnimator.speed = 0;
         }
 
 
@@ -280,6 +314,18 @@ namespace Manager
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+        }
+
+
+
+
+
+
+        internal void GizemliMakine9()
+        {
+            this.number9FalseLight.SetActive(false);
+            this.number9TrueLight.SetActive(true);
+            this.number9FalseMaterial.material = this.number9TrueMaterial;
         }
     }
 }

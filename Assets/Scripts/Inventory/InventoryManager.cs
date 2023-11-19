@@ -1,4 +1,5 @@
 using Manager;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -96,6 +97,23 @@ namespace Inventory
         }
 
 
+        internal Item SearchItem(string itemName)
+        {
+            foreach(InventoryItem inventoryItem in this.inventoryItems)
+            {
+                if (inventoryItem._item == null) continue;
+
+                if (inventoryItem._item._itemName == itemName)
+                {
+                    return inventoryItem._item;
+                }
+            }
+            return null;
+        }
+
+
+
+
 
         /// <summary>
         /// With this method, you can check whether there is any free space in the inventory!
@@ -130,16 +148,25 @@ namespace Inventory
                 {
                     case Item.ItemType.paper:
                         this.paperObject.SetActive(true);
-                        this.paperImage.sprite = inventoryItem._item._itemSprite;
+                        this.paperImage.sprite = inventoryItem._item._itemVisible;
+                        if (inventoryItem._item._cableIsTrue)
+                        {
+                            this.gameManager.uiManager.numberGameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            this.gameManager.uiManager.numberGameObject.SetActive(false);
+                        }
                         break;
 
                     case Item.ItemType.cable:
                         if (Vector3.Distance(this.gameManager._playerController._playerObject.transform.position, inventoryItem._item._itemAbleToGameObject.transform.position) < this.ableObjectDistance)
                         {
-                            if (inventoryItem._item._cableIsTrue)
+                            if (inventoryItem._item._cableIsTrue && inventoryItem._item._itemType != Item.ItemType.key)
                             {
                                 this.trueCable.SetActive(true);
                                 InventoryRemoveItem(inventoryItem._item);
+                                this.gameManager.GizemliMakine9();
                             }
                             else
                             {
@@ -150,6 +177,14 @@ namespace Inventory
                         else
                         {
                             Debug.Log("Obje kullanilamaz!!");
+                        }
+                        break;
+
+                    case Item.ItemType.key:
+                        if (Vector3.Distance(this.gameManager._playerController._playerObject.transform.position, inventoryItem._item._itemAbleToGameObject.transform.position) < this.ableObjectDistance)
+                        {
+                            InventoryRemoveItem(inventoryItem._item);
+                            this.gameManager.timeMachineAnimator.speed = 1;
                         }
                         break;
                 }

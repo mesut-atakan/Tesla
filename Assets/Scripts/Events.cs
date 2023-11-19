@@ -40,12 +40,18 @@ internal class Events : MonoBehaviour
             this.gameManager.ItemInteractionMod(false);
             Debug.Log($"Item interaction Mode <color=red><b>{this.gameManager._interactionItemMode}</b></color>");
             this.gameManager.CharacterVisibleChange(true);
+            this.gameManager.neonUI.SetActive(false);
         }
         else
         {
             this.gameManager._cameraManager._gameCamera = false;
             this.gameManager.ItemInteractionMod(true);
             this.gameManager.CharacterVisibleChange(false);
+        }
+
+        if (this.changeCameraAxis == CameraManager.CameraAxis.Neon)
+        {
+            this.gameManager.neonUI.SetActive(true);
         }
 
 

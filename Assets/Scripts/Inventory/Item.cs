@@ -16,6 +16,7 @@ namespace Inventory
 
         [Tooltip("Item 2D Design")]
         [SerializeField] private Sprite itemSprite;
+        [SerializeField] private Sprite itemVisible;
 
         [SerializeField] private string itemName;
         [SerializeField] private string itemDescription;
@@ -37,7 +38,8 @@ namespace Inventory
         public enum ItemType
         {
             paper,
-            cable
+            cable,
+            key
         }
 
 
@@ -55,6 +57,7 @@ namespace Inventory
         internal GameObject _itemAbleToGameObject { get => this.itemAbleToGameObject; }
         internal ItemType _itemType { get => this.itemType; }
         internal bool _cableIsTrue { get => this.cableIsTrue; }
+        internal Sprite _itemVisible { get => this.itemVisible; }
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
     }
