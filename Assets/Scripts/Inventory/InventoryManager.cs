@@ -24,6 +24,13 @@ namespace Inventory
 
         [SerializeField] private float ableObjectDistance = 2f;
 
+        
+
+        [Header("Objects")]
+
+        [SerializeField] private GameObject paperObject;
+        [SerializeField] private Image paperImage;
+
 
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
@@ -54,7 +61,11 @@ namespace Inventory
             InventoryItem _inventoryBox;
             
             _inventoryBox = InventoryIsFull();
-            if(_inventoryBox == null) return;
+            if(_inventoryBox == null)
+            {
+                Debug.Log("<color=red>Inventory Full!</color>");
+                return;
+            }
             Debug.Log("Add Item", _inventoryBox.gameObject);
             _inventoryBox._inventoryItemImage.sprite = item._itemSprite;
             _inventoryBox._boxFull = true;
@@ -110,9 +121,49 @@ namespace Inventory
 
         public void ItemToUse(InventoryItem inventoryItem)
         {
-            if (Vector3.Distance(this.gameManager._playerController._playerObject.transform.position, inventoryItem._item._itemAbleToGameObject.transform.position) < this.ableObjectDistance)
+            switch (inventoryItem._item._itemType)
             {
-                Debug.Log("Obje Kullanilabilir!");
+                case Item.ItemType.paper:
+                    this.paperObject.SetActive(true);
+                    this.paperImage.sprite = inventoryItem._item._itemSprite;
+                    break;
+
+                case Item.ItemType.cable:
+                    if (Vector3.Distance(this.gameManager._playerController._playerObject.transform.position, inventoryItem._item._itemAbleToGameObject.transform.position) < this.ableObjectDistance)
+                    {
+                        if (inventoryItem._item._cableIsTrue)
+                        {
+                            Debug.Log("Bu kablo dogru kablo!");
+                        }
+                        else
+                        {
+                            Debug.Log("Yanlis Kablo!");
+                            InventoryRemoveItem(inventoryItem._item);
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Obje kullanilamaz!!");
+                    }
+                    break;
+            }
+        }
+
+
+
+
+
+
+
+        /// <summary>
+        /// You can close the paper UI object with this method!
+        /// </summary>
+        internal void PaperClose()
+        {
+            if (this.paperObject.activeSelf == true)
+            {
+                this.paperImage.sprite = null;
+                this.paperObject.SetActive(false);
             }
         }
 

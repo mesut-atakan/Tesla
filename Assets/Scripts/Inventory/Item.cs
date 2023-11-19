@@ -25,7 +25,20 @@ namespace Inventory
 
         [SerializeField] private GameObject itemAbleToGameObject;
 
+        [SerializeField] private ItemType itemType;
+
+        [SerializeField] private bool cableIsTrue = false;
+
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
+
+
+
+
+        public enum ItemType
+        {
+            paper,
+            cable
+        }
 
 
 
@@ -40,6 +53,8 @@ namespace Inventory
         internal bool _canAddToInventory { get => this.canAddToInventory; }
         internal bool _canMove { get => this.canMove; }
         internal GameObject _itemAbleToGameObject { get => this.itemAbleToGameObject; }
+        internal ItemType _itemType { get => this.itemType; }
+        internal bool _cableIsTrue { get => this.cableIsTrue; }
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
     }

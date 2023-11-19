@@ -42,11 +42,14 @@ namespace Manager
 
 
 
+
         [Space(10f), Header("Interaction Classes")]
 
         [SerializeField] private InteractionTeslaCoil interactionTeslaCoil;
 
         [SerializeField] private InteractionTable interactionTable;
+
+        [SerializeField] private InteractionCable interactionCable;
       
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
@@ -125,6 +128,12 @@ namespace Manager
         {
             get => this.inventoryManager;
             set => this.inventoryManager = value;
+        }
+
+        internal InteractionCable _interactionCable
+        {
+            get => this.interactionCable;
+            set => this.interactionCable = value;
         }
 
 
@@ -206,6 +215,7 @@ namespace Manager
             }
             else if (Input.GetKeyDown(this.inputManager._backKey) || Input.GetKeyDown(this.inputManager._backKey2))
             {
+                this.inventoryManager.PaperClose();
                 this.playerController.GoToGameCamera();
             }
         }
@@ -216,7 +226,7 @@ namespace Manager
 
         private void LateUpdate() {
             this.playerController.AnimationController();
-
+            this.topDownCamera.CameraMovement();
             
         }
 

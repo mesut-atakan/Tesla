@@ -13,24 +13,6 @@ namespace Player
     {
 #region ||~~~~~~~~|| SERIALIZE FIELDS ||~~~~~~~~||
 
-        [Header("Character Properties")]
-
-        [SerializeField] private float characterSpeed;
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
 
 
         [Header("Classes Or Components")]

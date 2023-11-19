@@ -55,6 +55,7 @@ namespace CameraController
             TeslaCoil,
             Table,
             Telegraph,
+            Cabels,
             MainCamera
         }
 
@@ -94,12 +95,19 @@ namespace CameraController
 
                             break;
 
-                            case CameraAxis.MainCamera:
+                            case CameraAxis.Cabels:
                                 this._activeCamera.gameObject.SetActive(false);
-                                this.mainCamera.gameObject.SetActive(true);
-                                this._activeCamera = this.mainCamera;
-                                this.gameManager._itemInteraction._camera = null;
+                                this.gameManager._interactionCable._camera.gameObject.SetActive(true);
+                                this._activeCamera = this.gameManager._interactionCable._camera;
+                                this.gameManager._itemInteraction._camera = this._activeCamera;
                                 break;
+
+                                case CameraAxis.MainCamera:
+                                    this._activeCamera.gameObject.SetActive(false);
+                                    this.mainCamera.gameObject.SetActive(true);
+                                    this._activeCamera = this.mainCamera;
+                                    this.gameManager._itemInteraction._camera = null;
+                                    break;
             }
         }
 
