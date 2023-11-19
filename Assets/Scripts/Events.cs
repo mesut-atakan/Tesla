@@ -39,12 +39,13 @@ internal class Events : MonoBehaviour
             this.gameManager._cameraManager._gameCamera = true;
             this.gameManager.ItemInteractionMod(false);
             Debug.Log($"Item interaction Mode <color=red><b>{this.gameManager._interactionItemMode}</b></color>");
-
+            this.gameManager.CharacterVisibleChange(true);
         }
         else
         {
             this.gameManager._cameraManager._gameCamera = false;
             this.gameManager.ItemInteractionMod(true);
+            this.gameManager.CharacterVisibleChange(false);
         }
 
 

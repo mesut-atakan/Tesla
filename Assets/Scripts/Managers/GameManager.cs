@@ -247,6 +247,19 @@ namespace Manager
 
 
 
+        /// <summary>
+        /// With this method you can turn the character's appearance on and off.
+        /// </summary>
+        /// <param name="value"></param>
+        internal void CharacterVisibleChange(bool value)
+        {
+            this.playerController._playerObject.SetActive(value);
+        }
+
+
+
+
+
 
 
 

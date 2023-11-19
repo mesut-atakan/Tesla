@@ -39,6 +39,8 @@ namespace Player
         [SerializeField] private Animator animator;
         [SerializeField] private GameManager gameManager;
 
+        [SerializeField] private GameObject playerObject;
+
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 
@@ -76,6 +78,11 @@ namespace Player
 #region ||~~~~~~~~|| PROPERTIES ||~~~~~~~~||
 
         internal bool _interactionMove { get; set; } = false;
+        internal GameObject _playerObject 
+        {
+            get => this.playerObject;
+             set => this.playerObject = value;
+        }
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 

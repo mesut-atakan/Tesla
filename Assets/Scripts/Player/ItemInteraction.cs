@@ -58,7 +58,7 @@ namespace Player
 
 
 
-
+        // Sahnedeki objeyyi almak icin kullanilir!!!!!!!!!
         /// <summary>
         /// This method will allow you to interact with items!
         /// </summary>
@@ -82,7 +82,6 @@ namespace Player
                         _inventoryItem.gameObject.SetActive(false);
                         this.gameManager._inventoryManager.InventoryAddItem(_inventoryItem);
                     }
-
                 }
             }
         }

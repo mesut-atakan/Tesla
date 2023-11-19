@@ -20,14 +20,6 @@ namespace Inventory
 
 
 
-
-        [Header("UI Object")]
-        [SerializeField] private GameObject mouseItemObject;
-        [SerializeField] private Image mouseItemImage;
-
-        [SerializeField] private float itemDistanceMouse = 10f;
-
-
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 
@@ -36,8 +28,7 @@ namespace Inventory
 
 #region ||~~~~~~~~|| PROPERTIE ||~~~~~~~~||
 
-        // internal bool itemMove { get; set; } = false;
-        private float distanceFromMouse = 1f;
+
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
@@ -65,6 +56,24 @@ namespace Inventory
             _inventoryBox._inventoryItemImage.enabled = true;
         }
 
+
+
+        /// <summary>
+        /// You can delete items from the inventory with this method
+        /// </summary>
+        /// <param name="item">Select the object you want to delete</param>
+        internal void InventoryRemoveItem(Item item)
+        {
+            foreach(InventoryItem inventoryItem in this.inventoryItems)
+            {
+                if (inventoryItem._item == item)
+                {
+                    inventoryItem._boxFull = false;
+                    inventoryItem._inventoryItemImage.sprite = null;
+                    inventoryItem._item = null;
+                }
+            }
+        }
 
 
 
