@@ -36,11 +36,14 @@ namespace Inventory
         [SerializeField] private GameObject trueCable;
 
 
+        public Animator boxAnimator;
+
+
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 
-
+bool kablo = false;
 
 
 #region ||~~~~~~~~|| PROPERTIE ||~~~~~~~~||
@@ -167,6 +170,7 @@ namespace Inventory
                                 this.trueCable.SetActive(true);
                                 InventoryRemoveItem(inventoryItem._item);
                                 this.gameManager.GizemliMakine9();
+                                this.kablo = true;
                             }
                             else
                             {
@@ -181,10 +185,19 @@ namespace Inventory
                         break;
 
                     case Item.ItemType.key:
+                    Debug.Log("Key");
                         if (Vector3.Distance(this.gameManager._playerController._playerObject.transform.position, inventoryItem._item._itemAbleToGameObject.transform.position) < this.ableObjectDistance)
                         {
+                            Debug.Log("KeyDistance");
+                            
+                            if (this.kablo == true)
+                            {
+                                Debug.Log("kablo true");
+                            this.boxAnimator.SetTrigger("etkin");
                             InventoryRemoveItem(inventoryItem._item);
-                            this.gameManager.timeMachineAnimator.speed = 1;
+                            
+
+                            }
                         }
                         break;
                 }

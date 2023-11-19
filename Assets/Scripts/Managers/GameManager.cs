@@ -69,7 +69,6 @@ namespace Manager
 
 
 
-        public Animator timeMachineAnimator;
 
 
 
@@ -170,7 +169,7 @@ namespace Manager
 
 
 
-#endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
+        #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 
 
@@ -190,11 +189,14 @@ namespace Manager
 
 
 
+        [System.Obsolete]
         private void Awake() 
         {
             this.cameraManager._activeCamera = this.cameraManager._mainCamera;
             this.playerController._isMove = true;
-            this.timeMachineAnimator.speed = 0;
+            Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen, 60);
+
+
         }
 
 
