@@ -228,13 +228,15 @@ namespace Player
 
 
 
-        internal void GoToGameCamera()
+        internal bool GoToGameCamera()
         {
             if (this.gameManager._cameraManager._gameCamera == false)
             {
                 this.gameManager._events.changeCameraAxis = CameraController.CameraManager.CameraAxis.MainCamera;
                 this.gameManager._cameraManager.GoToGameCameraAxisAnimation();
+                return true;
             }
+            return false;
         }
     }
 }

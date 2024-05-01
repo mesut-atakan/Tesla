@@ -213,13 +213,15 @@ bool kablo = false;
         /// <summary>
         /// You can close the paper UI object with this method!
         /// </summary>
-        internal void PaperClose()
+        internal bool PaperClose()
         {
             if (this.paperObject.activeSelf == true)
             {
                 this.paperImage.sprite = null;
                 this.paperObject.SetActive(false);
+                return true;
             }
+            return false;
         }
 
         #endregion

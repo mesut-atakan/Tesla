@@ -16,6 +16,8 @@ namespace Manager
         [SerializeField] private KeyCode backKey = KeyCode.Escape;
         [SerializeField] private KeyCode backKey2 = KeyCode.Backspace;
 
+        [SerializeField] private KeyCode gamePause = KeyCode.Escape;
+
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
 
 
@@ -31,6 +33,8 @@ namespace Manager
 
         internal KeyCode _backKey { get => this.backKey; }
         internal KeyCode _backKey2 { get => this.backKey2; }
+
+        internal KeyCode _gamePause => this.gamePause;
 
 #endregion ||~~~~~~~~|| XXXX ||~~~~~~~~||
     }

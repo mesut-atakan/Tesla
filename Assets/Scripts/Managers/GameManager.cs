@@ -4,6 +4,7 @@ using Player;
 using Interaction;
 using Inventory;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 
 namespace Manager
@@ -66,6 +67,13 @@ namespace Manager
 
         public MeshRenderer number9FalseMaterial;
         public Material number9TrueMaterial;
+
+
+
+
+        [Header("Events")]
+
+        public UnityEvent escapeEvent;
 
 
 
@@ -251,8 +259,12 @@ namespace Manager
             }
             else if (Input.GetKeyDown(this.inputManager._backKey) || Input.GetKeyDown(this.inputManager._backKey2))
             {
-                this.inventoryManager.PaperClose();
-                this.playerController.GoToGameCamera();
+                // variables
+                 this.inventoryManager.PaperClose();
+                bool _gamePauseControl = this.playerController.GoToGameCamera();
+
+                if (_gamePauseControl == false)
+                    this.escapeEvent.Invoke();
             }
         }
 
