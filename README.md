@@ -1,3 +1,4 @@
+<img src="I6c2h8.png">
 # Zamanın Gizemi: Tesla'nın Mirası
 
 ## Oyun Hikayesi
@@ -20,3 +21,11 @@ Sonunda gizemli makineyi çözersiniz ve karşınıza çıkan şey, aslında bir
 - Mesut Atakan Temiz => Developer
 - Halit Can Güneri => Game Designer
 - Önder Kalaycı => 3D Art
+
+
+## Oynanış
+<img src="CEVz04.png"> <b>Haraket Et</b>
+
+<img src="QBqQ+k.png"> <b>Etkilesime Gec</b>
+
+<img src="g2aJEU.png"> <b>Geri Dön</b>
